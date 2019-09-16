@@ -44,7 +44,7 @@ public class Restarter extends JavaPlugin {
 					String[] split = s.split(":");
 					int sec = Integer.valueOf(split[0]);
 					String usage = split[1];
-					String text = split[2].replace('&', 'ง');
+					String text = split[2].replace('&', 'ยง');
 					if(timer == sec) {
 						if(usage.equals("MESSAGE")) for(Player all : Bukkit.getOnlinePlayers()) all.sendMessage(ChatColor.translateAlternateColorCodes('&', text));
 						if(usage.equals("COMMAND")) for(Player p : Bukkit.getOnlinePlayers()) if(!p.hasPermission("restarter.executables.bypass")) Bukkit.dispatchCommand(p, text); 
@@ -53,7 +53,11 @@ public class Restarter extends JavaPlugin {
 				}
 				if(timer < 0) {
 					for(Player all : Bukkit.getOnlinePlayers()) all.kickPlayer(prefix + getConfString("kick-message")); 
-					Bukkit.spigot().restart();
+					if(plugin.getConfBool("use-restart-script")) {
+						Bukkit.spigot().restart();
+					} else {
+						Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "restart");
+					}
 				}
 			}
 		}.runTaskTimer(this, 0, 20 * 1); 	
