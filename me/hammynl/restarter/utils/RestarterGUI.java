@@ -30,7 +30,7 @@ public class RestarterGUI implements Listener {
 	
 	public void restarterGUI(Player p) {
 		Inventory inv = Bukkit.createInventory(null, 9 * plugin.getConfInt("gui.rows"), plugin.getConfString("gui.title"));
-		for(int i = 0; i < 9 * plugin.getConfInt("gui.rows"); i++) inv.setItem(i, createItem(Material.valueOf(plugin.getConfString("gui.fill-item")), 1, "ง6", null));
+		for(int i = 0; i < 9 * plugin.getConfInt("gui.rows"); i++) inv.setItem(i, createItem(Material.valueOf(plugin.getConfString("gui.fill-item")), 1, "ยง6", null));
 		int count = 0;
 
 		while(plugin.getConfig().getString("gui." + count) != null) {
@@ -60,7 +60,11 @@ public class RestarterGUI implements Listener {
 						plugin.timer = plugin.timer + plugin.getConfInt("gui." + count + ".add");
 						if(plugin.getConfBool("gui." + count + ".shutdown")) {
 							for(Player all : Bukkit.getOnlinePlayers()) all.kickPlayer(plugin.prefix + plugin.getConfString("kick-message")); 
-							Bukkit.spigot().restart();
+							if(plugin.getConfBool("use-restart-script")) {
+								Bukkit.spigot().restart();
+							} else {
+								Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "restart");
+							}
 						}
 					}
 					count++;
