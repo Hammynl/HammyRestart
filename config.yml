@@ -26,6 +26,11 @@
 
 time: 7200 # This is equal to 2 hours 
 
+# Are you hosting at home or do you prefer a startup script? Enable this feature!
+# This feature will use the restart script provided in spigot.yml's "restart-script" option.
+# If this feature is off, The plugin will restart your server the traditional way.
+use-restart-script: false
+
 # Message that every player gets when the server restarts. 
 # Every player is guaranteed to see this because 
 # the shutdown only occurs after the loop through the players has been finished.
