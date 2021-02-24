@@ -1,0 +1,12 @@
+name: "HammyRestart"
+description: "Restart your server every X seconds"
+version: 3.0.1
+author: "Hammynl"
+main: "com.github.hammynl.restarter.Restarter"
+api-version: "1.16"
+commands:
+  restarter:
+    description: Shows the help menu
+    usage: /restarter
+    aliases: [hr, hammyrestart]
+

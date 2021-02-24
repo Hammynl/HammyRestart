@@ -1,0 +1,125 @@
+####################################################################################################
+# +                                                                            
+# |                                                                                         
+# |  DISCORD: https://discord.gg/D3NG9Yz                                                       
+# |  AUTHOR: https://www.spigotmc.org/members/552330/                                      
+# |  CONFIG CREATED ON VERSION: 3.0                                                      
+# |                                                                                             
+# |  Hey! Thank you for using HammyRestart!         
+# |  If you need support. Feel free to join the discord above 
+# |  or either message me on SpigotMC.                   
+# |                                                                                             
+# |  Make sure to leave a nice review if you enjoy my work!                                     
+# +
+####################################################################################################
+
+# Every time option in the config is in seconds, Some websites to help you out with your math 
+# Days to seconds: https://www.calculateme.com/time/days/to-seconds/
+# Hours to seconds: https://www.calculateme.com/time/hours/to-seconds/
+# Minutes to seconds: https://www.calculateme.com/time/minutes/to-seconds/
+time: 7200 # This is equal to 2 hours 
+
+
+# This prefix is placed behind every message. Want to disable
+# the prefix? Just place an empty string ""
+prefix: "&7[&6&lHammy&e&lRestart&7] "
+
+
+# Prefer a restart script? Enable this feature!
+# This feature will use the restart script provided in spigot.yml's "restart-script" option.
+# if this is false the server will restart the traditional way.
+use-restart-script: false
+
+
+# Message that shows in the disconnecting screen in case you don't have a fallback server.
+kick-message: "&6Server is restarting! Join back in a couple minutes!"
+
+# Message that shows if you try to execute a command which you do not have permission for
+no-permission: "&cYou do not have the correct permission to execute this command."
+  
+# Message that shows if you see the time. Use %seconds, %minutes or %hours to replace it with the actual time
+time-message: "&6There is currently &e%minutes &6minutes left before restart. &e(%hours hours)"
+
+# This GUI is completely configurable. Add buttons that remove or add seconds to the timer in case you want to!
+# For instructions about what each thing does. Look at the comments next to it and the example items!
+# You can add, edit and remove all of these gui items. These are just examples to get you started.
+gui:
+  # Title, Rows and fill-item can be configured here.
+  title: "&a&lRestarter Menu" 
+  rows: 3
+  fill-item: WHITE_STAINED_GLASS_PANE # Item to add in all of the blank spaces in the gui. Use "AIR" if you do not want anything
+  
+  0:
+    slot: 3 # The slot the item gets in, The gui starts from 0
+    item: GREEN_WOOL 
+    amount: 1 
+    name: "&a&lAdd 5 minutes!"
+    lore:
+    - "&6Press the button to activate!"
+    button:
+      # For the button type, You can use "addition", "removal", "shutdown" or "timestamp" 
+      # "addition" will add whatever is defined below to the timer
+      # "removal" will remove whatever is defined below from the timer
+      # "shutdown" will immediately shutdown the server. No executables will be run.
+      # "timestamp" will set the timer to the defined timestamp below. Executables will still run.
+      # The value is what will be added, subtracted or switched to depending on what type of button you have.
+      type: "addition" 
+      value: 300 
+      
+  1:
+    slot: 4
+    item: RED_WOOL
+    amount: 1
+    name: "&c&lRestart the server!"
+    lore:
+    - "&cIf you press me, The server restarts!"
+    button:
+      type: "shutdown" # In case your button type is a shutdown. The value on the left will be ignored
+      value: 0
+      
+  2:
+    slot: 5
+    item: ORANGE_WOOL
+    amount: 1
+    name: "&6&lRemove 5 minutes!"
+    lore:
+    - "&6Press the button to activate!"
+    button:
+      type: "removal"
+      value: 300    
+  3:
+    slot: 13
+    item: CLOCK
+    amount: 1
+    name: "&6&lQueue restart in 5 minutes!"
+    lore:
+    - "&6Press the button to activate!"
+    button:
+      type: "timestamp"
+      value: 300
+      
+      
+    
+    
+
+# Create your own executables here! For example run a message when restarting happens in 30 seconds. Or saving your files when there is 10 seconds left.  
+# You can add, edit and remove all of these executables. These are just examples to get you started.
+
+executables:
+  # EXAMPLE: Sends a notifying message when there is 30 seconds left
+  0:
+    time: 30 # Indicates how long before the restart this executable should run.
+    type: "message" # Indicates if it is either a message that is sent, A command that is ran by all players or by the console.
+    input: "&6Server restarts in &c30 &6seconds" # The actual input. This can be a message or a command depending on what type of executable you chose.
+    
+  # EXAMPLE: Sends all your players to the hub 5 seconds before restart so they aren't kicked completely.
+  1:
+    time: 5
+    type: "players"
+    input: "/hub"
+  # EXAMPLE: Saves your world before the server is restarted for security at 5 seconds left.
+  2:
+    time: 5
+    type: "console"
+    input: "/save-all" 
+    
